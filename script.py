@@ -67,15 +67,15 @@ key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02)j\xdf\xcb
 enc = Encryptor(key)
 clear = lambda: os.system('cls')
 
-if os.path.isfile('password.txt.enc'):
+if os.path.isfile('p.txt.enc'):
     while True:
         password = str(input("Enter password: "))
-        enc.decrypt_file("password.txt.enc")
+        enc.decrypt_file("p.txt.enc")
         p = ''
-        with open("password.txt", "r") as f:
+        with open("p.txt", "r") as f:
             p = f.readlines()
         if p[0] == password:
-            enc.encrypt_file("password.txt")
+            enc.encrypt_file("p.txt")
             break
 
     while True:
@@ -105,10 +105,10 @@ else:
             break
         else:
             print("Passwords Mismatched!")
-    f = open("password.txt", "w+")
+    f = open("p.txt", "w+")
     f.write(password)
     f.close()
-    enc.encrypt_file("password.txt")
+    enc.encrypt_file("p.txt")
     print("Please restart the program to complete the setup")
 
 
