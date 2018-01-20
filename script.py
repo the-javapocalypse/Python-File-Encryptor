@@ -6,6 +6,7 @@ import os
 import os.path
 from os import listdir
 from os.path import isfile, join
+import time
 
 
 class Encryptor:
@@ -48,7 +49,7 @@ class Encryptor:
         dirs = []
         for dirName, subdirList, fileList in os.walk(dir_path):
             for fname in fileList:
-                if (fname != 'script.py' and fname != 'password.txt.enc'):
+                if (fname != 'script.py' and fname != 'data.txt.enc'):
                     dirs.append(dirName + "\\" + fname)
         return dirs
 
@@ -110,6 +111,7 @@ else:
     f.close()
     enc.encrypt_file("data.txt")
     print("Please restart the program to complete the setup")
+    time.sleep(15)
 
 
 
