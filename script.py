@@ -1,13 +1,19 @@
 #!/usr/bin/python3
+import os, os.path
+import getpass
+import time
 
 from Crypto import Random
 from Crypto.Cipher import AES
-import os
-import os.path
-from os import listdir
-from os.path import isfile, join
-import time
 
+""" Encrypts and decrypts files. For use with python 3.
+    Creates and encrypts data.txt to store password.
+    
+    Opens file, parse info, overwrite encrypted info to file
+    
+    Added getpass to avoid clear text passwords"""
+
+#TODO Allow only one password
 
 class Encryptor:
     def __init__(self, key):
@@ -16,7 +22,7 @@ class Encryptor:
     def pad(self, s):
         return s + b"\0" * (AES.block_size - len(s) % AES.block_size)
 
-    def encrypt(self, message, key, key_size=256):
+    def encrypt(self, message, key):
         message = self.pad(message)
         iv = Random.new().read(AES.block_size)
         cipher = AES.new(key, AES.MODE_CBC, iv)
@@ -64,13 +70,15 @@ class Encryptor:
             self.decrypt_file(file_name)
 
 
+
 key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02)j\xdf\xcb\xc4\x94\x9d(\x9e'
 enc = Encryptor(key)
-clear = lambda: os.system('cls')
+clear = lambda: os.system('clear')
+
 
 if os.path.isfile('data.txt.enc'):
     while True:
-        password = str(input("Enter password: "))
+        password = getpass.getpass("[!] Enter your password: ")
         enc.decrypt_file("data.txt.enc")
         p = ''
         with open("data.txt", "r") as f:
@@ -82,7 +90,8 @@ if os.path.isfile('data.txt.enc'):
     while True:
         clear()
         choice = int(input(
-            "1. Press '1' to encrypt file.\n2. Press '2' to decrypt file.\n3. Press '3' to Encrypt all files in the directory.\n4. Press '4' to decrypt all files in the directory.\n5. Press '5' to exit.\n"))
+            "1. Press '1' to encrypt file.\n2. Press '2' to decrypt file.\n3. Press '3' to Encrypt all files in the "
+            "directory.\n4. Press '4' to decrypt all files in the directory.\n5. Press '5' to exit.\n"))
         clear()
         if choice == 1:
             enc.encrypt_file(str(input("Enter name of file to encrypt: ")))
@@ -100,8 +109,8 @@ if os.path.isfile('data.txt.enc'):
 else:
     while True:
         clear()
-        password = str(input("Setting up stuff. Enter a password that will be used for decryption: "))
-        repassword = str(input("Confirm password: "))
+        password = getpass.getpass("Setting up stuff. Enter a password that will be used for decryption: ")
+        repassword = getpass.getpass("Confirm password: ")
         if password == repassword:
             break
         else:
@@ -110,8 +119,5 @@ else:
     f.write(password)
     f.close()
     enc.encrypt_file("data.txt")
-    print("Please restart the program to complete the setup")
-    time.sleep(15)
-
-
-
+    print("The program will restart shortly. Please re-run.")
+time.sleep(5)
