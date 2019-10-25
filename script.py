@@ -93,7 +93,7 @@ if os.path.isfile('data.txt.enc'):
         elif choice == 4:
             enc.decrypt_all_files()
         elif choice == 5:
-            exit()
+            break
         else:
             print("Please select a valid option!")
 
