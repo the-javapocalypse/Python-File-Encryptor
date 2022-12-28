@@ -1,5 +1,5 @@
 # Python-File-Encryptor
-Encrypt and Decrypt files (AES using CBC Mode) in Python. For a detailed text/video based tutorial you might want to check out this [link](http://www.letscodepro.com/encryption-in-python-using-pycrypto/).
+Encrypt and Decrypt files (AES using CBC Mode) in Python. For a detailed text/video based tutorial you might want to check out this [link](https://www.youtube.com/watch?v=UB2VX4vNUa0).
 
 ## Getting Started
 
