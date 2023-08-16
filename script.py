@@ -8,7 +8,6 @@ from os import listdir
 from os.path import isfile, join
 import time
 
-
 class Encryptor:
     def __init__(self, key):
         self.key = key
@@ -63,7 +62,6 @@ class Encryptor:
         for file_name in dirs:
             self.decrypt_file(file_name)
 
-
 key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02)j\xdf\xcb\xc4\x94\x9d(\x9e'
 enc = Encryptor(key)
 clear = lambda: os.system('cls')
@@ -112,6 +110,3 @@ else:
     enc.encrypt_file("data.txt")
     print("Please restart the program to complete the setup")
     time.sleep(15)
-
-
-
